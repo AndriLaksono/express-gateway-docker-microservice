@@ -1,0 +1,14 @@
+{
+  "name": "test-eg2",
+  "description": "Express Gateway Instance Bootstraped from Command Line",
+  "repository": {},
+  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "example": "0.0.0",
+    "express-gateway": "1.16.3",
+    "express-gateway-plugin-example": "^1.0.1",
+    "express-gateway-plugin-jwt-custom": "0.0.7"
+  }
+}

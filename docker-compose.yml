@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+  egateway:
+    hostname: 127.0.0.1
+    container_name: egateway
+    build: './test-eg2'
+    ports: 
+      - "8080:8080"
+    depends_on: 
+      - mongo
+    environment: 
+      - LOG_LEVEL=debug
+
+  api-auth:
+    container_name: api-auth
+    build: './api-auth'
+    ports: 
+      - "3003:3003"
+    links: 
+      - mongo
+      - egateway
+
+  api-crud:
+    container_name: api-crud
+    build: './api-crud'
+    ports: 
+      - "3004:3004"
+    links: 
+      - mongo
+      - egateway
+
+  mongo:
+    container_name: mongo-dbx
+    image: mongo
+    ports: 
+      - "27017:27017"

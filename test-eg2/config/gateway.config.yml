@@ -1,0 +1,66 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+apiEndpoints:
+  authAPI:
+    host: '*'
+    paths:
+      - '/users/signin'
+      - '/users/signup'
+      - '/users/oauth/facebook'
+      - '/users/auth/google'
+      - '/users/auth/google/callback'
+      - '/users/secret'
+      - '/users/get-user-google'
+      - '/dashboard'
+      - '/test'
+  crudAPI:
+    host: '*'
+    paths:
+      - '/users/get-user-data'
+      - '/users/delete-user-data'
+      - '/users/add-user-data'
+      - '/users/get-one-user-data/*'
+      - '/users/update-user-data'
+      - '/users/update-pass-user-data'
+serviceEndpoints:
+  authService:
+    url: 'http://api-auth:3003'
+  crudService:
+    url: 'http://api-crud:3004'
+policies:
+  - log
+  - proxy
+  - jwt
+  - cors
+  - jwt-custom1
+pipelines:
+  crud:
+    apiEndpoints:
+      - crudAPI
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'GET, POST, PUT, DELETE'
+              allowedHeaders: 'X-Requested-With,content-type,Authorization'
+              credentials: true
+      # - jwt:
+      #     - action:
+      #         jwtExtractor: 'authBearer'
+      #         checkCredentialExistence: false
+      #         secretOrPublicKey: secretAuth
+      #         passThrough: true
+      - jwt-custom1:
+      - proxy:
+          - action:
+              serviceEndpoint: crudService
+  auth:
+    apiEndpoints:
+      - authAPI
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: authService
+

@@ -1,0 +1,16 @@
+{
+    "apps": [
+        {
+            "name": "eg",
+            "script": "./test-eg2"
+        },
+        {
+            "name": "api-auth",
+            "script": "./api-auth/app.js"
+        },
+        {
+            "name": "api-crud",
+            "script": "./api-crud/app.js"
+        }
+    ]
+}
