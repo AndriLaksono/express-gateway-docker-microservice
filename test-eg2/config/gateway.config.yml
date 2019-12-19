@@ -62,6 +62,12 @@ pipelines:
     apiEndpoints:
       - authAPI
     policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'GET, POST, PUT, DELETE'
+              allowedHeaders: 'X-Requested-With,content-type,Authorization'
+              credentials: true
       - proxy:
           - action:
               serviceEndpoint: authService
