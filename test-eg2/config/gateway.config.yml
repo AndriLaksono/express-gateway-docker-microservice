@@ -26,9 +26,11 @@ apiEndpoints:
       - '/users/update-pass-user-data'
 serviceEndpoints:
   authService:
-    url: 'http://api-auth:3003'
+    url: 'http://api-auth:3003' # docker
+    # url: 'http://localhost:3003' # pm2
   crudService:
-    url: 'http://api-crud:3004'
+    url: 'http://api-crud:3004' # docker
+    # url: 'http://localhost:3004' # pm2
 policies:
   - log
   - proxy

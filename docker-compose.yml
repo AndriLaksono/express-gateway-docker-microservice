@@ -31,6 +31,17 @@ services:
       - mongo
       - egateway
 
+  react-client:
+    container_name: react-client
+    build: './0-react-client'
+    ports: 
+      - "3000:3000"
+    links: 
+      - mongo
+      - egateway
+      - api-auth
+      - api-crud
+
   mongo:
     container_name: mongo-dbx
     image: mongo
