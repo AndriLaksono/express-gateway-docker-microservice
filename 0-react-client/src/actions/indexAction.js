@@ -36,10 +36,12 @@ export const signUp = data => {
         try {
             const res = await Axios.post("http://localhost:8080/users/signup", data);
 
+            let resultToken = "Bearer " + res.data.token;
+
             dispatch({
                 type: AUTH_SIGN_UP,
                 payload: {
-                    token: res.data.token,
+                    token: resultToken,
                     idUser: res.data.id,
                     name: res.data.name,
                     email: res.data.email,
@@ -48,9 +50,9 @@ export const signUp = data => {
                 }
             });
 
-            Axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.token;
+            Axios.defaults.headers.common['Authorization'] = resultToken;
 
-            localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('JWT_TOKEN', resultToken);
             localStorage.setItem('idUser', res.data.id);
             localStorage.setItem('name', res.data.name);
             localStorage.setItem('email', res.data.email);
@@ -70,11 +72,13 @@ export const oauthFacebook = data => {
         try {
             const res = await Axios.post("http://localhost:8080/users/oauth/facebook", { access_token: data });
             
+            let resultToken = "Bearer " + res.data.token;
+
             dispatch({
                 type: AUTH_SIGN_UP,
                 payload: {
                     idUser: res.data.id,
-                    token: res.data.token,
+                    token: resultToken,
                     name: res.data.name,
                     email: res.data.email,
                     level: res.data.level,
@@ -82,9 +86,9 @@ export const oauthFacebook = data => {
                 }
             });
 
-            Axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.token;
+            Axios.defaults.headers.common['Authorization'] = resultToken;
 
-            localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('JWT_TOKEN', resultToken);
             localStorage.setItem('idUser', res.data.id);
             localStorage.setItem('name', res.data.name);
             localStorage.setItem('email', res.data.email);
@@ -118,11 +122,13 @@ export const signIn = (data) => {
         try {
             const res = await Axios.post("http://localhost:8080/users/signin", data);
 
+            let resultToken = "Bearer " + res.data.token;
+
             dispatch({
                 type: AUTH_SIGN_IN,
                 payload: {
                     idUser: res.data.id,
-                    token: res.data.token,
+                    token: resultToken,
                     name: res.data.name,
                     email: res.data.email,
                     level: res.data.level,
@@ -130,9 +136,9 @@ export const signIn = (data) => {
                 }
             });
 
-            Axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.token;
+            Axios.defaults.headers.common['Authorization'] = resultToken;
 
-            localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('JWT_TOKEN', resultToken);
             localStorage.setItem('idUser', res.data.id);
             localStorage.setItem('name', res.data.name);
             localStorage.setItem('email', res.data.email);
@@ -167,6 +173,8 @@ export const setSecret = (data) => {
         try {
             const res = await Axios.post('http://localhost:8080/users/get-user-google', data);
             
+            let resultToken = "Bearer " + res.data.token;
+
             dispatch({
                 type: AUTH_SET_SECRET,
                 payload: {
@@ -179,9 +187,9 @@ export const setSecret = (data) => {
                 }
             });
 
-            Axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.token;
+            Axios.defaults.headers.common['Authorization'] = resultToken;
 
-            localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('JWT_TOKEN', resultToken);
             localStorage.setItem('idUser', res.data.id);
             localStorage.setItem('name', res.data.name);
             localStorage.setItem('email', res.data.email);

@@ -53,13 +53,10 @@ class EditDataUser extends React.Component {
                 },
             });
         }
-
-        console.log("Local state", this.state.userValue);
     }
 
     async onSubmit(formData) {
-        await this.setState({ ...this.state })
-        console.log("form data", this.state.userValue);
+        await this.setState({ ...this.state });
         
         // Send dispatch
         await this.props.updateUserData(this.state.userValue);
@@ -116,7 +113,6 @@ class EditDataUser extends React.Component {
             password: this.state.upPassword,
             id: this.state.userValue._id
         }
-        console.log("Masuk sini...")
 
         // Send dispatch
         await this.props.updatePassUserData(data);
